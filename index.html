@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIJA | Главная</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(255, 0, 60, 0.08), transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(100, 0, 255, 0.05), transparent 55%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 92%;
+            margin: 0 auto;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ff003c, #ff6b8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: #ff003c;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff003c;
+            transition: 0.3s;
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 50px;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #ffffff 20%, #ff003c 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #888;
+            margin-top: 12px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            animation: fadeUp 1s ease-out 0.15s forwards;
+            opacity: 0;
+        }
+
+        .hero .btn-primary {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 16px 55px;
+            background: #ff003c;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 50px rgba(255, 0, 60, 0.2);
+            border: none;
+            cursor: pointer;
+            animation: fadeUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .hero .btn-primary:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 80px rgba(255, 0, 60, 0.35);
+        }
+
+        .about {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px 45px;
+            margin: 40px 0 50px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            animation: fadeUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .about h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        .about p {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .about .highlight {
+            color: #ff003c;
+            font-weight: 700;
+        }
+
+        .about ul {
+            list-style: none;
+            margin-top: 18px;
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+        }
+
+        .about ul li {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .road {
+            margin: 50px 0 60px;
+            animation: fadeUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .road h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+        }
+
+        .road h2 span {
+            color: #ff003c;
+        }
+
+        .road-wrapper {
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 20px 0 40px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .road-wrapper::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .road-wrapper::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 4px;
+        }
+
+        .road-wrapper::-webkit-scrollbar-thumb {
+            background: #ff003c;
+            border-radius: 4px;
+        }
+
+        .road-line {
+            display: flex;
+            align-items: flex-start;
+            padding: 0 10px;
+            min-width: fit-content;
+            gap: 28px;
+            position: relative;
+        }
+
+        .road-line::before {
+            content: '';
+            position: absolute;
+            top: 74px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: linear-gradient(to right, #ff003c, #333, #ff003c);
+            border-radius: 2px;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .road-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 150px;
+            max-width: 170px;
+            padding: 0 5px;
+            position: relative;
+            z-index: 1;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .road-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .road-item .dot {
+            width: 16px;
+            height: 16px;
+            background: #ff003c;
+            border: 3px solid #0a0a0a;
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.2);
+            margin-top: 66px;
+            margin-bottom: 14px;
+            flex-shrink: 0;
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        .road-item.highlight .dot {
+            background: #fff;
+            border-color: #ff003c;
+            box-shadow: 0 0 45px rgba(255, 0, 60, 0.5);
+            width: 20px;
+            height: 20px;
+            margin-top: 64px;
+        }
+
+        .cover {
+            width: 130px;
+            height: 130px;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.04);
+            background: #141414;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cover:hover {
+            border-color: #ff003c;
+            transform: scale(1.06);
+            box-shadow: 0 25px 60px rgba(255, 0, 60, 0.12);
+        }
+
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cover .num {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 10px;
+            border-radius: 6px;
+            z-index: 2;
+            backdrop-filter: blur(4px);
+        }
+
+        .cover .date {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 10px;
+            border-radius: 6px;
+            z-index: 2;
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.5px;
+        }
+
+        .cover .badge {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: 0.5rem;
+            font-weight: 700;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 20px;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.15);
+        }
+
+        .cover .badge.album {
+            background: #6a00ff;
+            box-shadow: 0 0 20px rgba(106, 0, 255, 0.2);
+        }
+
+        .cover .badge.single {
+            background: #00aaff;
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.15);
+        }
+
+        .cover .badge.hit {
+            background: #ff003c;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.3);
+        }
+
+        .cover .badge.ep {
+            background: #ff8c00;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .road-item.highlight .cover {
+            border-color: #ff003c;
+            box-shadow: 0 0 50px rgba(255, 0, 60, 0.12);
+        }
+
+        .title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+            max-width: 130px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.3;
+        }
+
+        .prod {
+            font-size: 0.6rem;
+            color: #666;
+            text-align: center;
+            max-width: 130px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+
+        .road-item.highlight .title {
+            color: #ff003c;
+        }
+
+        .release-links {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .release-links a {
+            color: #555;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .release-links a:hover {
+            color: #ff003c;
+            border-color: #ff003c;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.15);
+        }
+
+        .scroll-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .scroll-btns button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #aaa;
+            padding: 10px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .scroll-btns button:hover {
+            background: #ff003c;
+            color: #fff;
+            border-color: #ff003c;
+            box-shadow: 0 0 35px rgba(255, 0, 60, 0.15);
+        }
+
+        .scroll-btns button:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+            border-color: transparent;
+        }
+
+        .scroll-btns button:disabled:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: #aaa;
+            box-shadow: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 30px;
+        }
+
+        .footer p {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav {
+                gap: 20px;
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+            .hero .subtitle {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+            .about {
+                padding: 28px 25px;
+            }
+            .about ul {
+                gap: 18px;
+            }
+            .road-item {
+                min-width: 120px;
+                max-width: 140px;
+            }
+            .cover {
+                width: 100px;
+                height: 100px;
+            }
+            .title {
+                font-size: 0.7rem;
+                max-width: 100px;
+            }
+            .prod {
+                font-size: 0.5rem;
+                max-width: 100px;
+            }
+            .road-item .dot {
+                width: 12px;
+                height: 12px;
+                margin-top: 70px;
+            }
+            .road-item.highlight .dot {
+                width: 16px;
+                height: 16px;
+                margin-top: 68px;
+            }
+            .road-line::before {
+                top: 78px;
+            }
+            .release-links a {
+                width: 24px;
+                height: 24px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            .hero .subtitle {
+                font-size: 0.85rem;
+            }
+            .hero {
+                padding: 50px 10px 30px;
+            }
+            .hero .btn-primary {
+                padding: 14px 35px;
+                font-size: 0.85rem;
+            }
+            .about {
+                padding: 20px 16px;
+            }
+            .about h2 {
+                font-size: 1.2rem;
+            }
+            .about p {
+                font-size: 0.9rem;
+            }
+            .about ul li {
+                font-size: 0.85rem;
+            }
+            .road-item {
+                min-width: 90px;
+                max-width: 110px;
+            }
+            .cover {
+                width: 80px;
+                height: 80px;
+                border-radius: 14px;
+            }
+            .cover .num,
+            .cover .date,
+            .cover .badge {
+                font-size: 0.4rem;
+                padding: 1px 6px;
+            }
+            .title {
+                font-size: 0.6rem;
+                max-width: 80px;
+            }
+            .prod {
+                font-size: 0.45rem;
+                max-width: 80px;
+            }
+            .road-item .dot {
+                width: 10px;
+                height: 10px;
+                margin-top: 72px;
+            }
+            .road-item.highlight .dot {
+                width: 14px;
+                height: 14px;
+                margin-top: 70px;
+            }
+            .road-line::before {
+                top: 80px;
+            }
+            .scroll-btns button {
+                padding: 8px 18px;
+                font-size: 0.7rem;
+            }
+            .road h2 {
+                font-size: 1.5rem;
+            }
+            .release-links a {
+                width: 20px;
+                height: 20px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <a href="index.html" class="logo">LIJA</a>
+        <nav class="nav">
+            <a href="index.html" class="active">Главная</a>
+            <a href="album.html">Релизы</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>LIJA</h1>
+        <p class="subtitle">Sound Production &amp; Art</p>
+        <a href="album.html" class="btn-primary">Слушать треки →</a>
+    </section>
+
+    <section class="about">
+        <h2>Кто я?</h2>
+        <p>
+            Привет, я <span class="highlight">LIJA</span>. Это мой звуковой маяк.
+            Всю магию звука замешивает мой продюсер <span class="highlight">B1asst</span> —
+            без него я бы просто орал в микрофон, а так у нас получается искусство.
+        </p>
+        <ul>
+            <li>🌊 <span class="highlight">J-прилив (J-Tide)</span> — поймай волну.</li>
+            <li>🔥 <span class="highlight">Пиздец</span> — выплеск эмоций.</li>
+            <li>🥯 <span class="highlight">Бублик</span> — просто кайф.</li>
+        </ul>
+    </section>
+
+    <section class="road">
+        <h2>🗺️ <span>Дорога</span> релизов</h2>
+
+        <div class="road-wrapper" id="roadWrapper">
+            <div class="road-line" id="roadLine"></div>
+        </div>
+
+        <div class="scroll-btns">
+            <button id="prevBtn">← Назад</button>
+            <button id="nextBtn">Вперед →</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025–2026 LIJA. Все права защищены.</p>
+    </footer>
+
+</div>
+
+<script>
+    // ===== ИКОНКИ ПЛАТФОРМ =====
+    const platformIcons = {
+        spotify: '🟢',
+        vk: '🔵',
+        yandex: '🟡',
+        apple: '🔴'
+    };
+
+    // ===== ВСЕ РЕЛИЗЫ =====
+    const releases = [
+        {
+            id: 1,
+            date: '28.10.2024',
+            title: 'Последнее лето',
+            prod: 'prod. b1asst',
+            cover: 'images/01-poslednee-leto.jpg',
+            highlight: false,
+            links: {
+                spotify: 'https://open.spotify.com/album/4AjVwLvKJ7m9X6X0aH0RT9?si=2Fjx-i0qSReMmERXSeIIQ',
+                vk: 'https://vk.com/music/album/-2000288246_22288246_cddbd6d437d47a6a60',
+                yandex: 'https://music.yandex.ru/album/33770881?utm_source=web&utm_medium=copy_link',
+                apple: 'https://music.apple.com/ru/album/%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5-%D0%BB%D0%B5%D1%82%D0%BE/1775826018'
+            }
+        },
+        {
+        id: 9,
+        date: '29.11.2024',
+        title: 'LAZER VOVA 2',
+        prod: 'prod. b1asst',
+        cover: 'images/02-lazer-vova-2.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/3F2DjGwXORHfPzLeQ0Ix80?si=ubq5sc04TiiITEVc7MpMRQ',
+            vk: 'https://vk.com/audio-2001451672_132451672',
+            yandex: 'https://music.yandex.ru/album/34087807/track/133133715?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/lazer-vova-2-single/1780551402'
+        }
+    },
+    {
+        id: 2,
+        date: '06.01.2025',
+        title: 'NEW WAY 2',
+        prod: 'prod. b1asst',
+        cover: 'images/03-new-way-2.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/7ksvvxe3m1qN4xrpW8Ngc6?si=pw4bBoOAStmVGyMgGkOaLQ',
+            vk: 'https://vk.com/music/album/-2000873503_22873503_5f66b9eb63ee7d3ad5',
+            yandex: 'https://music.yandex.ru/album/34723244?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/new-way-2/1830464448'
+        }
+    },
+    {
+        id: 11,
+        date: '15.03.2025',
+        title: 'Не вернусь',
+        prod: 'prod. b1asst',
+        cover: 'images/04-ne-vernus.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/5MIu03CVicGjbwU0YmB7xS?si=FI2bnwr_RE-IjJDte9LtXA',
+            vk: 'https://vk.com/music/album/-2000576601_23576601_7d8deb6422f91974b2',
+            yandex: 'https://music.yandex.ru/album/35882151?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/не-вернусь-single/1833560594'
+        }
+    },
+    {
+        id: 12,
+        date: '06.05.2025',
+        title: 'Помощь ангелов',
+        prod: 'prod. LIJA',
+        cover: 'images/05-pomosh-angelov.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/0DxXc4FjR4qq5qW5CWw2fX?si=_LsjSYlQSkeg_bidmtndBQ',
+            vk: 'https://vk.com/music/album/-2000071824_24071824_66092f7a8a1d27477a',
+            yandex: 'https://music.yandex.ru/album/36570773?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/помощь-ангелов-single/1835979665'
+        }
+    },
+    {
+        id: 3,
+        date: '03.07.2025',
+        title: '4 U',
+        prod: 'LIJA, act0r1',
+        cover: 'images/06-4u.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/6tXtxiMa9uyBu5hzmF3Upc?si=yGS7Sx4yS1mUMFhUjgKgIg',
+            vk: 'https://vk.com/music/album/-2000595685_24595685_1068f29e7c34d19a78',
+            yandex: 'https://music.yandex.ru/album/37290077?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/4-u-feat-act0r1-ep/1838244453'
+        }
+    },
+    {
+        id: 14,
+        date: '18.07.2025',
+        title: 'Реально Последнее Лето',
+        prod: 'ft. vladislavdbelya',
+        cover: 'images/07-realno-poslednee-leto.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/6hxujzaM8nOhTpKGYObzjk?si=cPwAraq2T0-d2z5d0vSN_Q',
+            vk: 'https://vk.com/music/album/-2000645616_24645616_5a50ed5361c5e64b72',
+            yandex: 'https://music.yandex.ru/album/37362533?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D1%80%D0%B5%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5-%D0%BB%D0%B5%D1%82%D0%BE-feat-vladislavdbelya-single/1838610111'
+        }
+    },
+    {
+        id: 4,
+        date: '25.07.2025',
+        title: 'КОДЕКС',
+        prod: 'prod. LIJA',
+        cover: 'images/08-kodeks.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/3PDYe06CcwcjNMjYJ3eJAJ?si=ED-GmllsQySTK81diLtDdw',
+            vk: 'https://vk.com/music/album/-2000693552_24693552_cd19026732e526f764',
+            yandex: 'https://music.yandex.ru/album/37426385?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D0%BA%D0%BE%D0%B4%D0%B5%D0%BA%D1%81/1839079331'
+        }
+    },
+    {
+        id: 16,
+        date: '01.08.2025',
+        title: 'Порой Другой Белый Хочет',
+        prod: 'prod. b1asst',
+        cover: 'images/09-belyi-hochet.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/4srJU0TsuSNeEOZ3Yvp3Co?si=nO6qm0pYTq-zxPO6QPcf2w',
+            vk: 'https://vk.com/music/album/-2000772472_24772472_1d176ed7694fe34bf7',
+            yandex: 'https://music.yandex.ru/album/37529854?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D0%BF%D0%BE%D1%80%D0%BE%D0%B9-%D0%B4%D1%80%D1%83%D0%B3%D0%BE%D0%B9-%D0%B1%D0%B5%D0%BB%D1%8B%D0%B9-%D1%85%D0%BE%D1%87%D0%B5%D1%82-single/1827982353'
+        }
+    },
+    {
+        id: 17,
+        date: '22.08.2025',
+        title: 'Головокружение',
+        prod: 'prod. b1asst',
+        cover: 'images/10-golovokruzenie.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/2dc7SCpCjxkY3quf1ysjPW?si=U0g5OLjpTKydM5bRp7XE8w',
+            vk: 'https://vk.com/music/album/-2000942553_24942553_e39864eb1c34e415fb',
+            yandex: 'https://music.yandex.ru/album/37775753?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-single/1832534230'
+        }
+    },
+    {
+        id: 18,
+        date: '29.08.2025',
+        title: 'Бублик',
+        prod: 'prod. b1asst ⭐',
+        cover: 'images/11-bublik.jpg',
+        highlight: true,
+        links: {
+            spotify: 'https://open.spotify.com/album/05htTC3PrzcltHSLVa1USV?si=1j5BN11AQVu0RrMw4OjJsg',
+            vk: 'https://vk.com/music/album/-2000964751_24964751_a4e52764879f134c95',
+            yandex: 'https://music.yandex.ru/album/37806750?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D0%B1%D1%83%D0%B1%D0%BB%D0%B8%D0%BA-single/1832983192'
+        }
+    },
+    {
+        id: 5,
+        date: '06.10.2025',
+        title: 'MUSIC IS ME, Pt. 2',
+        prod: 'prod. b1asst',
+        cover: 'images/12-music-is-me-pt2.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/156WUlTHU9gufuRlqbUAkN?si=IwFvColzSq-3K5XZgqBlPg',
+            vk: 'https://vk.com/music/album/-2000454754_25454754_7f9f3bb90040fa24f3',
+            yandex: 'https://music.yandex.ru/album/38528287?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/music-is-me-pt-2/1847212599'
+        }
+    },
+    {
+        id: 6,
+        date: '05.11.2025',
+        title: 'NW 4',
+        prod: 'prod. b1asst',
+        cover: 'images/13-nw-4.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/594x04pU86lTphmToshSS7?si=Cjoa800DR02xBIzTUNvyRg',
+            vk: 'https://vk.com/music/album/-2000730495_25730495_0fbb096c1727611733',
+            yandex: 'https://music.yandex.ru/album/39007129?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/nw-4-single/1857221524'
+        }
+    },
+    {
+        id: 21,
+        date: '10.11.2025',
+        title: 'Jump',
+        prod: 'prod. LIJA',
+        cover: 'images/14-jump.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/3eM1e3WjHP5UyeX9NrcgvX?si=6MiOpLKYQjmqxT3PEvtKRA',
+            vk: 'https://vk.com/music/album/-2000784073_25784073_22ea6dc5c67e022f6e',
+            yandex: 'https://music.yandex.ru/album/39083196?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/jump-single/1858042365'
+        }
+    },
+    {
+        id: 22,
+        date: '01.12.2025',
+        title: 'Хочу',
+        prod: 'prod. LIJA',
+        cover: 'images/15-hochu.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/2y9lSf07fTiU0o1lzzORw9?si=xe3JZhY1RZ-QWAS7E3GDiA',
+            vk: 'https://vk.com/music/album/-2000000756_26000756_63ca35f7966d5d1659',
+            yandex: 'https://music.yandex.ru/album/39489829?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D1%85%D0%BE%D1%87%D1%83-single/1863102913'
+        }
+    },
+    {
+        id: 7,
+        date: '16.01.2026',
+        title: 'LIJA',
+        prod: 'prod. LIJA',
+        cover: 'images/16-lija.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/6FOKIniLr3G9zOvb6re2KV?si=Q9N8dD0QTmejAMHO2SPEcA',
+            vk: 'https://vk.com/music/album/-2000212399_26212399_2a768e77e842d9bafc',
+            yandex: 'https://music.yandex.ru/album/39872570?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/lija/1866232808'
+        }
+    },
+    {
+        id: 24,
+        date: '27.02.2026',
+        title: 'More (Remix)',
+        prod: 'LIJA, act0r1 · prod. b1asst',
+        cover: 'images/17-more-remix.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/1MESothC6rwmiFDrmvayKK?si=RIcykXSWQiOdzMV069XYAQ',
+            vk: 'https://vk.com/music/album/-2000980682_26980682_1ca3a1b86bf7d72e74',
+            yandex: 'https://music.yandex.ru/album/41064376?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.yandex.ru/album/41064376?utm_source=web&utm_medium=copy_link'
+        }
+    },
+    {
+        id: 8,
+        date: '25.03.2026',
+        title: 'BM26 (Last One)',
+        prod: 'LIJA, b1asst · prod. b1asst',
+        cover: 'images/18-bm26.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/4pcnRltqD8j2j9JyIGFdr6?si=DAkOHcFqS86mGii5diH9Hw',
+            vk: 'https://vk.com/music/album/-2000982793_26982793_474dc88c176bf0a529',
+            yandex: 'https://music.yandex.ru/album/41069021?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/bm26-last-one/1885769833'
+        }
+    },
+    {
+        id: 26,
+        date: '01.05.2026',
+        title: 'Ненавижу зиму',
+        prod: 'LIJA, Confl1ct',
+        cover: 'images/19-nenavizhu-zimu.jpg',
+        highlight: true,
+        links: {
+            spotify: 'https://open.spotify.com/album/4hFNfaavttMZsJyZ0EMXjB?si=8-o6zZo0TZK_5erwUL5xJg',
+            vk: 'https://vk.com/music/album/-2000177045_27177045_1169e857443d3a9da0',
+            yandex: 'https://music.yandex.ru/album/41377478?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D0%BD%D0%B5%D0%BD%D0%B0%D0%B2%D0%B8%D0%B6%D1%83-%D0%B7%D0%B8%D0%BC%D1%83-single/1890770765'
+        }
+    },
+    {
+        id: 9,
+        date: '08.05.2026',
+        title: 'Эхо в пустой комнате',
+        prod: 'LIJA, Confl1ct',
+        cover: 'images/20-eho.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/7jHUOHimFddJWmYLFhsIaf?si=0-CXW-k7QU2YTXqeZMga_Q',
+            vk: 'https://vk.com/music/album/-2000301988_27301988_524251d4aeccffac46',
+            yandex: 'https://music.yandex.ru/album/41481590?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D1%8D%D1%85%D0%BE-%D0%B2-%D0%BF%D1%83%D1%81%D1%82%D0%BE%D0%B9-%D0%BA%D0%BE%D0%BC%D0%BD%D0%B0%D1%82%D0%B5-ep/1892917028'
+        }
+    },
+    {
+        id: 28,
+        date: '29.05.2026',
+        title: 'Космос',
+        prod: 'LIJA, b1asst · prod. b1asst ⭐',
+        cover: 'images/21-kosmos.jpg',
+        highlight: false,
+        links: {
+            spotify: 'https://open.spotify.com/album/73DBCDwGxK6OTGNSYZuxaF?si=_FgWNK8ySmGTwZZQ3jX15Q',
+            vk: 'https://vk.com/music/album/-2000283991_27283991_1fc95e515818296e89',
+            yandex: 'https://music.yandex.ru/album/41458544?utm_source=web&utm_medium=copy_link',
+            apple: 'https://music.apple.com/ru/album/%D0%BA%D0%BE%D1%81%D0%BC%D0%BE%D1%81-single/1892197003'
+        }
+    }
+];
+
+    const albumTitles = ['Последнее лето', '4 U', 'NEW WAY 2', 'КОДЕКС', 'MUSIC IS ME, Pt. 2', 'NW 4', 'LIJA', 'BM26 (Last One)', 'Эхо в пустой комнате'];
+
+    const roadLine = document.getElementById('roadLine');
+
+    releases.forEach((rel, index) => {
+        const item = document.createElement('div');
+        item.className = 'road-item' + (rel.highlight ? ' highlight' : '');
+
+        // ===== ОБЛОЖКА =====
+        const coverLink = document.createElement('a');
+        coverLink.className = 'cover';
+
+        let badgeText = '';
+        let badgeClass = '';
+        if (rel.highlight) {
+            badgeText = '⭐ ХИТ';
+            badgeClass = 'hit';
+        } else if (albumTitles.includes(rel.title)) {
+            badgeText = '🎵 Альбом';
+            badgeClass = 'album';
+        } else {
+            badgeText = '🎧 Сингл';
+            badgeClass = 'single';
+        }
+
+        if (albumTitles.includes(rel.title)) {
+            coverLink.href = `album.html?id=${rel.id}`;
+        } else {
+            coverLink.href = `track.html?id=${rel.id}`;
+        }
+
+        coverLink.innerHTML = `
+            <img src="${rel.cover}" alt="${rel.title}" loading="lazy">
+            <span class="num">#${index + 1}</span>
+            <span class="date">${rel.date}</span>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+        `;
+
+        // ===== ТОЧКА =====
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+
+        // ===== НАЗВАНИЕ =====
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = rel.title;
+
+        // ===== ПРОДЮСЕР =====
+        const prod = document.createElement('div');
+        prod.className = 'prod';
+        prod.textContent = rel.prod;
+
+        // ===== ССЫЛКИ НА ПЛОЩАДКИ =====
+        const linksContainer = document.createElement('div');
+        linksContainer.className = 'release-links';
+
+        if (rel.links) {
+            for (const [platform, url] of Object.entries(rel.links)) {
+                if (url) {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.target = '_blank';
+                    a.title = platform.charAt(0).toUpperCase() + platform.slice(1);
+                    a.textContent = platformIcons[platform] || '🔗';
+                    linksContainer.appendChild(a);
+                }
+            }
+        }
+
+        // ===== СОБИРАЕМ КАРТОЧКУ =====
+        item.appendChild(coverLink);
+        item.appendChild(dot);
+        item.appendChild(title);
+        item.appendChild(prod);
+        item.appendChild(linksContainer);
+
+        roadLine.appendChild(item);
+    });
+
+    // ===== ПРОКРУТКА =====
+    const wrapper = document.getElementById('roadWrapper');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateBtns() {
+        const scrollLeft = wrapper.scrollLeft;
+        const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+        prevBtn.disabled = scrollLeft <= 5;
+        nextBtn.disabled = scrollLeft >= maxScroll - 5;
+    }
+
+    function scrollRoad(dir) {
+        const amount = wrapper.clientWidth * 0.7;
+        wrapper.scrollBy({ left: dir * amount, behavior: 'smooth' });
+        setTimeout(updateBtns, 400);
+    }
+
+    prevBtn.addEventListener('click', () => scrollRoad(-1));
+    nextBtn.addEventListener('click', () => scrollRoad(1));
+    wrapper.addEventListener('scroll', updateBtns);
+    window.addEventListener('resize', updateBtns);
+
+    setTimeout(updateBtns, 100);
+</script>
+
+</body>
+</html>

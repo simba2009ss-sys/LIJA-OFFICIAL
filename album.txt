@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIJA | Последнее лето</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 95%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        nav a {
+            color: #888;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff003c;
+            text-shadow: 0 0 10px #ff003c;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: #ff003c;
+        }
+
+        .album-header {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #1a1a1a;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .album-cover {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+            border: 2px solid #2a2a2a;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #0d0d0d;
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .album-info {
+            flex: 1;
+        }
+
+        .album-info .label {
+            font-size: 0.8rem;
+            color: #ff003c;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .album-info h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin: 5px 0 10px;
+        }
+
+        .album-info .date {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .album-info .prod {
+            color: #666;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .album-info .count {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .track-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .track-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #2a2a2a;
+            transition: 0.3s;
+        }
+
+        .track-list li:hover {
+            border-color: #ff003c;
+            transform: translateX(5px);
+            background: #222;
+        }
+
+        .track-list li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .track-list li a:hover {
+            color: #ff003c;
+        }
+
+        .track-number {
+            color: #ff003c;
+            font-weight: bold;
+            font-size: 0.85rem;
+            min-width: 35px;
+        }
+
+        .track-title {
+            flex: 1;
+        }
+
+        .track-duration {
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        .track-list li .play-icon {
+            color: #555;
+            transition: 0.3s;
+        }
+
+        .track-list li:hover .play-icon {
+            color: #ff003c;
+        }
+
+        @media (max-width: 768px) {
+            .album-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .album-cover {
+                width: 160px;
+                height: 160px;
+            }
+
+            .album-info h1 {
+                font-size: 2rem;
+            }
+
+            .track-list li {
+                padding: 12px 15px;
+            }
+
+            .track-list li a {
+                font-size: 0.9rem;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .album-cover {
+                width: 130px;
+                height: 130px;
+            }
+
+            .album-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .track-list li {
+                padding: 10px 12px;
+            }
+
+            .track-list li a {
+                font-size: 0.8rem;
+            }
+
+            .track-number {
+                font-size: 0.7rem;
+                min-width: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- НАВИГАЦИЯ -->
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="tracks.html">Треки</a>
+    </nav>
+
+    <!-- НАЗАД -->
+    <a href="index.html" class="back-link">← Назад к релизам</a>
+
+    <!-- АЛЬБОМ -->
+    <div class="album-header">
+        <div class="album-cover">
+            <img src="images/01-poslednee-leto.jpg" alt="Последнее лето">
+        </div>
+        <div class="album-info">
+            <div class="label">🎵 Альбом</div>
+            <h1>Последнее лето</h1>
+            <div class="date">📅 28 октября 2024</div>
+            <div class="prod">prod. b1asst</div>
+            <div class="count">8 треков</div>
+        </div>
+    </div>
+
+    <!-- СПИСОК ТРЕКОВ -->
+    <ul class="track-list">
+        <li>
+            <a href="track.html?id=1">
+                <span class="track-number">01</span>
+                <span class="track-title">На память (as a keepsake)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=2">
+                <span class="track-number">02</span>
+                <span class="track-title">Новая жизнь (A new life)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=3">
+                <span class="track-number">03</span>
+                <span class="track-title">Прогулка (walk)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=4">
+                <span class="track-number">04</span>
+                <span class="track-title">Та самая (The one)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=5">
+                <span class="track-number">05</span>
+                <span class="track-title">Ночная прогулка (night walk)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=6">
+                <span class="track-number">06</span>
+                <span class="track-title">Алкоголь (alcohol)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=7">
+                <span class="track-number">07</span>
+                <span class="track-title">Потерял себя (Lost myself)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+        <li>
+            <a href="track.html?id=8">
+                <span class="track-number">08</span>
+                <span class="track-title">Слёзы (Weeping)</span>
+                <span class="play-icon">▶</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>
