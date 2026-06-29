@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIJA | Релизы</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -14,96 +12,56 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: #0a0a0a;
-            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
             min-height: 100vh;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at 20% 50%, rgba(255, 0, 60, 0.06), transparent 60%),
-                        radial-gradient(ellipse at 80% 50%, rgba(100, 0, 255, 0.04), transparent 60%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         .container {
             max-width: 1300px;
-            width: 92%;
+            width: 95%;
             margin: 0 auto;
-            padding: 20px 0;
-            position: relative;
-            z-index: 1;
+            padding: 20px;
         }
 
-        .header {
+        nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #ff003c, #ff6b8a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .nav {
-            display: flex;
+            justify-content: center;
             gap: 30px;
-            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #1a1a1a;
         }
 
-        .nav a {
-            color: #aaa;
+        nav a {
+            color: #888;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
-            position: relative;
         }
 
-        .nav a:hover,
-        .nav a.active {
+        nav a.active,
+        nav a:hover {
             color: #ff003c;
         }
 
-        .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #ff003c;
+        .back-link {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            margin: 20px 0;
             transition: 0.3s;
         }
 
-        .nav a:hover::after,
-        .nav a.active::after {
-            width: 100%;
+        .back-link:hover {
+            color: #ff003c;
         }
 
         .page-title {
-            font-size: 2.5rem;
-            font-weight: 800;
             text-align: center;
+            font-size: 2.5rem;
             margin: 40px 0 10px;
             letter-spacing: 2px;
         }
@@ -117,22 +75,21 @@
             color: #666;
             font-size: 1rem;
             margin-bottom: 40px;
-            letter-spacing: 1px;
         }
 
         .releases-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 30px;
-            margin: 20px 0 60px;
+            margin-bottom: 60px;
         }
 
         .release-card {
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid #2a2a2a;
+            transition: 0.3s;
             text-decoration: none;
             color: #fff;
             cursor: pointer;
@@ -141,7 +98,7 @@
         .release-card:hover {
             transform: translateY(-8px);
             border-color: #ff003c;
-            box-shadow: 0 20px 50px rgba(255, 0, 60, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.1);
         }
 
         .release-card.highlight {
@@ -149,15 +106,14 @@
         }
 
         .release-card.highlight:hover {
-            box-shadow: 0 20px 50px rgba(255, 0, 60, 0.2);
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.2);
         }
 
         .release-card .cover-wrap {
             width: 100%;
             aspect-ratio: 1 / 1;
-            position: relative;
             overflow: hidden;
-            background: #0a0a0a;
+            background: #0d0d0d;
         }
 
         .release-card .cover-wrap img {
@@ -171,159 +127,268 @@
             transform: scale(1.03);
         }
 
-        .release-card .cover-wrap .play-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: 0.3s;
-            backdrop-filter: blur(2px);
-        }
-
-        .release-card:hover .cover-wrap .play-overlay {
-            opacity: 1;
-        }
-
-        .release-card .cover-wrap .play-overlay span {
-            font-size: 3rem;
-            color: #fff;
-            background: #ff003c;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 40px rgba(255, 0, 60, 0.4);
-        }
-
         .release-card .info {
-            padding: 16px 18px 18px;
+            padding: 14px 16px 16px;
         }
 
         .release-card .info .title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            max-width: 100%;
+            display: block;
         }
 
         .release-card .info .meta {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #666;
             margin-top: 4px;
         }
 
         .release-card .info .badge {
             display: inline-block;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             padding: 2px 10px;
             border-radius: 20px;
-            margin-top: 8px;
+            margin-top: 6px;
         }
 
-        .release-card .info .badge.album {
+        .badge.album {
             background: #6a00ff;
             color: #fff;
         }
-
-        .release-card .info .badge.single {
+        .badge.single {
             background: #00aaff;
             color: #fff;
         }
-
-        .release-card .info .badge.hit {
+        .badge.hit {
             background: #ff003c;
             color: #fff;
-            box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
         }
-
-        .release-card .info .badge.ep {
+        .badge.ep {
             background: #ff8c00;
             color: #fff;
         }
 
         .release-links {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .release-links a {
             color: #555;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             transition: 0.3s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .release-links a:hover {
             color: #ff003c;
             border-color: #ff003c;
-            transform: scale(1.2);
+            transform: scale(1.15);
             box-shadow: 0 0 20px rgba(255, 0, 60, 0.15);
+        }
+
+        .album-detail {
+            animation: fadeUp 0.5s ease-out forwards;
+        }
+
+        .album-header {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #2a2a2a;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .album-cover {
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #0d0d0d;
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .album-info {
+            flex: 1;
+        }
+
+        .album-info h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .album-info .date {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .album-info .prod {
+            color: #666;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .album-info .count {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .album-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .album-links a {
+            color: #555;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .album-links a:hover {
+            color: #ff003c;
+            border-color: #ff003c;
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.15);
+        }
+
+        .track-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .track-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+        }
+
+        .track-list li:hover {
+            border-color: #ff003c;
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .track-list li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .track-list li a:hover {
+            color: #ff003c;
+        }
+
+        .track-number {
+            color: #ff003c;
+            font-weight: bold;
+            font-size: 0.85rem;
+            min-width: 35px;
+        }
+
+        .track-title {
+            flex: 1;
+        }
+
+        .play-icon {
+            color: #555;
+            transition: 0.3s;
+        }
+
+        .track-list li:hover .play-icon {
+            color: #ff003c;
         }
 
         .footer {
             text-align: center;
             padding: 40px 0 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            margin-top: 20px;
+            border-top: 1px solid #1a1a1a;
         }
 
         .footer p {
             color: #555;
             font-size: 0.8rem;
-            letter-spacing: 1px;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .page-title,
-        .page-subtitle,
-        .releases-grid {
-            animation: fadeUp 0.8s ease-out forwards;
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .nav {
-                gap: 20px;
-            }
-            .page-title {
-                font-size: 2rem;
-            }
             .releases-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 20px;
             }
-            .release-links a {
-                width: 24px;
-                height: 24px;
-                font-size: 0.9rem;
+            .album-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .album-cover {
+                width: 160px;
+                height: 160px;
+            }
+            .album-info h1 {
+                font-size: 2rem;
+            }
+            .page-title {
+                font-size: 2rem;
             }
         }
 
@@ -332,27 +397,36 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
-            .release-card .info {
-                padding: 12px 14px 14px;
-            }
             .release-card .info .title {
                 font-size: 0.75rem;
             }
             .release-card .info .meta {
                 font-size: 0.6rem;
             }
-            .release-card .cover-wrap .play-overlay span {
-                width: 50px;
-                height: 50px;
-                font-size: 2rem;
-            }
             .page-title {
                 font-size: 1.6rem;
             }
-            .release-links a {
-                width: 20px;
-                height: 20px;
-                font-size: 0.75rem;
+            .album-cover {
+                width: 130px;
+                height: 130px;
+            }
+            .album-info h1 {
+                font-size: 1.5rem;
+            }
+            .track-list li {
+                padding: 10px 12px;
+            }
+            .track-list li a {
+                font-size: 0.85rem;
+            }
+            .track-number {
+                font-size: 0.7rem;
+                min-width: 28px;
+            }
+            .album-links a {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -361,22 +435,16 @@
 
 <div class="container">
 
-    <header class="header">
-        <a href="index.html" class="logo">LIJA</a>
-        <nav class="nav">
-            <a href="index.html">Главная</a>
-            <a href="album.html" class="active">Релизы</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="album.html" class="active">Релизы</a>
+    </nav>
 
-    <h1 class="page-title">🎵 <span>Релизы</span></h1>
-    <p class="page-subtitle">Альбомы, EP и синглы</p>
+    <div id="albumContent"></div>
 
-    <div class="releases-grid" id="releasesGrid"></div>
-
-    <footer class="footer">
+    <div class="footer">
         <p>© 2025–2026 LIJA. Все права защищены.</p>
-    </footer>
+    </div>
 
 </div>
 
@@ -388,378 +456,280 @@
         apple: '🔴'
     };
 
-    const allReleases = [
-        {
+    // ===== ДАННЫЕ АЛЬБОМОВ =====
+    const albums = {
+        1: {
             id: 1,
             title: 'Последнее лето',
             date: '28.10.2024',
+            prod: 'prod. b1asst',
             cover: 'images/01-poslednee-leto.jpg',
-            type: 'album',
-            tracksCount: 8,
-            highlight: false,
-            link: 'album.html?id=1',
             links: {
                 spotify: 'https://open.spotify.com/album/4AjVwLvKJ7m9X6X0aH0RT9?si=2Fjx-i0qSReMmERXSeIIQ',
                 vk: 'https://vk.com/music/album/-2000288246_22288246_cddbd6d437d47a6a60',
                 yandex: 'https://music.yandex.ru/album/33770881?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5-%D0%BB%D0%B5%D1%82%D0%BE/1775826018'
-            }
+            },
+            tracks: [
+                { id: 1, title: 'На память (as a keepsake)' },
+                { id: 2, title: 'Новая жизнь (A new life)' },
+                { id: 3, title: 'Прогулка (walk)' },
+                { id: 4, title: 'Та самая (The one)' },
+                { id: 5, title: 'Ночная прогулка (night walk)' },
+                { id: 6, title: 'Алкоголь (alcohol)' },
+                { id: 7, title: 'Потерял себя (Lost myself)' },
+                { id: 8, title: 'Слёзы (Weeping)' }
+            ]
         },
-        {
-            id: 9,
-            title: 'LAZER VOVA 2',
-            date: '29.11.2024',
-            cover: 'images/02-lazer-vova-2.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=9',
-            links: {
-                spotify: 'https://open.spotify.com/album/3F2DjGwXORHfPzLeQ0Ix80?si=ubq5sc04TiiITEVc7MpMRQ',
-                vk: 'https://vk.com/audio-2001451672_132451672',
-                yandex: 'https://music.yandex.ru/album/34087807/track/133133715?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/lazer-vova-2-single/1780551402'
-            }
-        },
-        {
+        2: {
             id: 2,
             title: 'NEW WAY 2',
             date: '06.01.2025',
+            prod: 'prod. b1asst',
             cover: 'images/03-new-way-2.jpg',
-            type: 'album',
-            tracksCount: 7,
-            highlight: false,
-            link: 'album.html?id=2',
             links: {
                 spotify: 'https://open.spotify.com/album/7ksvvxe3m1qN4xrpW8Ngc6?si=pw4bBoOAStmVGyMgGkOaLQ',
                 vk: 'https://vk.com/music/album/-2000873503_22873503_5f66b9eb63ee7d3ad5',
                 yandex: 'https://music.yandex.ru/album/34723244?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/new-way-2/1830464448'
-            }
+            },
+            tracks: [
+                { id: 10, title: 'NEW WAY 2' },
+                { id: 29, title: 'Я ЕБАЛ РЭПЕРОВ' },
+                { id: 30, title: 'высоко (ft. vladislavdbelya)' },
+                { id: 9, title: 'LAZER VOVA 2' },
+                { id: 31, title: 'сладкий дым (ft. Act0r1)' },
+                { id: 32, title: 'приносят 2' },
+                { id: 33, title: 'курю так много (outro)' }
+            ]
         },
-        {
-            id: 11,
-            title: 'Не вернусь',
-            date: '15.03.2025',
-            cover: 'images/04-ne-vernus.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=11',
-            links: {
-                spotify: 'https://open.spotify.com/album/5MIu03CVicGjbwU0YmB7xS?si=FI2bnwr_RE-IjJDte9LtXA',
-                vk: 'https://vk.com/music/album/-2000576601_23576601_7d8deb6422f91974b2',
-                yandex: 'https://music.yandex.ru/album/35882151?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%BD%D0%B5-%D0%B2%D0%B5%D1%80%D0%BD%D1%83%D1%81%D1%8C-single/1833560594'
-            }
-        },
-        {
-            id: 12,
-            title: 'Помощь ангелов',
-            date: '06.05.2025',
-            cover: 'images/05-pomosh-angelov.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=12',
-            links: {
-                spotify: 'https://open.spotify.com/album/0DxXc4FjR4qq5qW5CWw2fX?si=_LsjSYlQSkeg_bidmtndBQ',
-                vk: 'https://vk.com/music/album/-2000071824_24071824_66092f7a8a1d27477a',
-                yandex: 'https://music.yandex.ru/album/36570773?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C-%D0%B0%D0%BD%D0%B3%D0%B5%D0%BB%D0%BE%D0%B2-single/1835979665'
-            }
-        },
-        {
+        3: {
             id: 3,
             title: '4 U',
             date: '03.07.2025',
+            prod: 'LIJA, act0r1',
             cover: 'images/06-4u.jpg',
-            type: 'ep',
-            tracksCount: 4,
-            highlight: false,
-            link: 'album.html?id=3',
             links: {
                 spotify: 'https://open.spotify.com/album/6tXtxiMa9uyBu5hzmF3Upc?si=yGS7Sx4yS1mUMFhUjgKgIg',
                 vk: 'https://vk.com/music/album/-2000595685_24595685_1068f29e7c34d19a78',
                 yandex: 'https://music.yandex.ru/album/37290077?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/4-u-feat-act0r1-ep/1838244453'
-            }
+            },
+            tracks: [
+                { id: 34, title: 'ПИЗДЕЦ (FUCKED UP)' },
+                { id: 35, title: 'Больше (More)' },
+                { id: 36, title: 'Амбиции (Ambitions)' },
+                { id: 37, title: 'Будущие (для тебя) (The future for you)' }
+            ]
         },
-        {
-            id: 14,
-            title: 'Реально Последнее Лето',
-            date: '18.07.2025',
-            cover: 'images/07-realno-poslednee-leto.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=14',
-            links: {
-                spotify: 'https://open.spotify.com/album/6hxujzaM8nOhTpKGYObzjk?si=cPwAraq2T0-d2z5d0vSN_Q',
-                vk: 'https://vk.com/music/album/-2000645616_24645616_5a50ed5361c5e64b72',
-                yandex: 'https://music.yandex.ru/album/37362533?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D1%80%D0%B5%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5-%D0%BB%D0%B5%D1%82%D0%BE-feat-vladislavdbelya-single/1838610111'
-            }
-        },
-        {
+        4: {
             id: 4,
             title: 'КОДЕКС',
             date: '25.07.2025',
+            prod: 'prod. LIJA',
             cover: 'images/08-kodeks.jpg',
-            type: 'album',
-            tracksCount: 11,
-            highlight: false,
-            link: 'album.html?id=4',
             links: {
                 spotify: 'https://open.spotify.com/album/3PDYe06CcwcjNMjYJ3eJAJ?si=ED-GmllsQySTK81diLtDdw',
                 vk: 'https://vk.com/music/album/-2000693552_24693552_cd19026732e526f764',
                 yandex: 'https://music.yandex.ru/album/37426385?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/%D0%BA%D0%BE%D0%B4%D0%B5%D0%BA%D1%81/1839079331'
-            }
+            },
+            tracks: [
+                { id: 38, title: 'Заповедь №0' },
+                { id: 39, title: 'Баланс' },
+                { id: 40, title: 'Не Гнись' },
+                { id: 41, title: 'СКОЛЬКО СТОИТ МОЛЧАНИЕ?' },
+                { id: 42, title: 'Круги На Воде' },
+                { id: 43, title: 'Чёрное Зеркало' },
+                { id: 44, title: 'Без Сожалений' },
+                { id: 45, title: 'Тени Прошлого' },
+                { id: 46, title: 'Код Доступа' },
+                { id: 47, title: 'Последний Урок' },
+                { id: 48, title: '«Кодекс»' }
+            ]
         },
-        {
-            id: 16,
-            title: 'Порой Другой Белый Хочет',
-            date: '01.08.2025',
-            cover: 'images/09-belyi-hochet.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=16',
-            links: {
-                spotify: 'https://open.spotify.com/album/4srJU0TsuSNeEOZ3Yvp3Co?si=nO6qm0pYTq-zxPO6QPcf2w',
-                vk: 'https://vk.com/music/album/-2000772472_24772472_1d176ed7694fe34bf7',
-                yandex: 'https://music.yandex.ru/album/37529854?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%BF%D0%BE%D1%80%D0%BE%D0%B9-%D0%B4%D1%80%D1%83%D0%B3%D0%BE%D0%B9-%D0%B1%D0%B5%D0%BB%D1%8B%D0%B9-%D1%85%D0%BE%D1%87%D0%B5%D1%82-single/1827982353'
-            }
-        },
-        {
-            id: 17,
-            title: 'Головокружение',
-            date: '22.08.2025',
-            cover: 'images/10-golovokruzenie.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=17',
-            links: {
-                spotify: 'https://open.spotify.com/album/2dc7SCpCjxkY3quf1ysjPW?si=U0g5OLjpTKydM5bRp7XE8w',
-                vk: 'https://vk.com/music/album/-2000942553_24942553_e39864eb1c34e415fb',
-                yandex: 'https://music.yandex.ru/album/37775753?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-single/1832534230'
-            }
-        },
-        {
-            id: 18,
-            title: 'Бублик',
-            date: '29.08.2025',
-            cover: 'images/11-bublik.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: true,
-            link: 'track.html?id=18',
-            links: {
-                spotify: 'https://open.spotify.com/album/05htTC3PrzcltHSLVa1USV?si=1j5BN11AQVu0RrMw4OjJsg',
-                vk: 'https://vk.com/music/album/-2000964751_24964751_a4e52764879f134c95',
-                yandex: 'https://music.yandex.ru/album/37806750?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%B1%D1%83%D0%B1%D0%BB%D0%B8%D0%BA-single/1832983192'
-            }
-        },
-        {
+        5: {
             id: 5,
             title: 'MUSIC IS ME, Pt. 2',
             date: '06.10.2025',
+            prod: 'prod. b1asst',
             cover: 'images/12-music-is-me-pt2.jpg',
-            type: 'album',
-            tracksCount: 10,
-            highlight: false,
-            link: 'album.html?id=5',
             links: {
                 spotify: 'https://open.spotify.com/album/156WUlTHU9gufuRlqbUAkN?si=IwFvColzSq-3K5XZgqBlPg',
                 vk: 'https://vk.com/music/album/-2000454754_25454754_7f9f3bb90040fa24f3',
                 yandex: 'https://music.yandex.ru/album/38528287?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/music-is-me-pt-2/1847212599'
-            }
+            },
+            tracks: [
+                { id: 49, title: 'ИНТРО' },
+                { id: 50, title: 'Чего Добился' },
+                { id: 18, title: 'Бублик' },
+                { id: 51, title: 'В Поисках Клада' },
+                { id: 52, title: 'Фейм, Тёлки и Пачки' },
+                { id: 53, title: 'Утро' },
+                { id: 54, title: 'Каждый День' },
+                { id: 55, title: 'Говорят' },
+                { id: 56, title: 'Даже Когда Ум...' },
+                { id: 17, title: 'Головокружение' }
+            ]
         },
-        {
+        6: {
             id: 6,
             title: 'NW 4',
             date: '05.11.2025',
+            prod: 'prod. b1asst',
             cover: 'images/13-nw-4.jpg',
-            type: 'ep',
-            tracksCount: 1,
-            highlight: false,
-            link: 'album.html?id=6',
             links: {
                 spotify: 'https://open.spotify.com/album/594x04pU86lTphmToshSS7?si=Cjoa800DR02xBIzTUNvyRg',
                 vk: 'https://vk.com/music/album/-2000730495_25730495_0fbb096c1727611733',
                 yandex: 'https://music.yandex.ru/album/39007129?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/nw-4-single/1857221524'
-            }
+            },
+            tracks: [
+                { id: 57, title: 'NW 4' }
+            ]
         },
-        {
-            id: 21,
-            title: 'Jump',
-            date: '10.11.2025',
-            cover: 'images/14-jump.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=21',
-            links: {
-                spotify: 'https://open.spotify.com/album/3eM1e3WjHP5UyeX9NrcgvX?si=6MiOpLKYQjmqxT3PEvtKRA',
-                vk: 'https://vk.com/music/album/-2000784073_25784073_22ea6dc5c67e022f6e',
-                yandex: 'https://music.yandex.ru/album/39083196?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/jump-single/1858042365'
-            }
-        },
-        {
-            id: 22,
-            title: 'Хочу',
-            date: '01.12.2025',
-            cover: 'images/15-hochu.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=22',
-            links: {
-                spotify: 'https://open.spotify.com/album/2y9lSf07fTiU0o1lzzORw9?si=xe3JZhY1RZ-QWAS7E3GDiA',
-                vk: 'https://vk.com/music/album/-2000000756_26000756_63ca35f7966d5d1659',
-                yandex: 'https://music.yandex.ru/album/39489829?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D1%85%D0%BE%D1%87%D1%83-single/1863102913'
-            }
-        },
-        {
+        7: {
             id: 7,
             title: 'LIJA',
             date: '16.01.2026',
+            prod: 'prod. LIJA',
             cover: 'images/16-lija.jpg',
-            type: 'album',
-            tracksCount: 14,
-            highlight: false,
-            link: 'album.html?id=7',
             links: {
                 spotify: 'https://open.spotify.com/album/6FOKIniLr3G9zOvb6re2KV?si=Q9N8dD0QTmejAMHO2SPEcA',
                 vk: 'https://vk.com/music/album/-2000212399_26212399_2a768e77e842d9bafc',
                 yandex: 'https://music.yandex.ru/album/39872570?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/lija/1866232808'
-            }
+            },
+            tracks: [
+                { id: 58, title: 'L (LIGHT) [SKIT]' },
+                { id: 59, title: 'Лицо в стекле' },
+                { id: 60, title: 'Искры (FIRE)' },
+                { id: 61, title: 'I (IDENTITY) [SKIT]' },
+                { id: 62, title: 'Белый шум' },
+                { id: 28, title: 'J-прилив (J-Tide)' },
+                { id: 63, title: 'J (JOURNEY) [SKIT]' },
+                { id: 64, title: 'Опять не правда' },
+                { id: 65, title: 'Атомы' },
+                { id: 66, title: 'A - (ACCEPTANCE) [SKIT]' },
+                { id: 67, title: 'Игра Теней' },
+                { id: 68, title: '(SKIT) - FIN' },
+                { id: 69, title: 'Дом (Ft. Три Дня Дождя) (Bonus)' },
+                { id: 70, title: 'Тоже мечтаю (Ft. OG BUDA) (Bonus)' }
+            ]
         },
-        {
-            id: 24,
-            title: 'More (Remix)',
-            date: '27.02.2026',
-            cover: 'images/17-more-remix.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=24',
-            links: {
-                spotify: 'https://open.spotify.com/album/1MESothC6rwmiFDrmvayKK?si=RIcykXSWQiOdzMV069XYAQ',
-                vk: 'https://vk.com/music/album/-2000980682_26980682_1ca3a1b86bf7d72e74',
-                yandex: 'https://music.yandex.ru/album/41064376?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/more-remix-single/1885769833'
-            }
-        },
-        {
+        8: {
             id: 8,
             title: 'BM26 (Last One)',
             date: '25.03.2026',
+            prod: 'LIJA, b1asst · prod. b1asst',
             cover: 'images/18-bm26.jpg',
-            type: 'album',
-            tracksCount: 19,
-            highlight: true,
-            link: 'album.html?id=8',
             links: {
                 spotify: 'https://open.spotify.com/album/4pcnRltqD8j2j9JyIGFdr6?si=DAkOHcFqS86mGii5diH9Hw',
                 vk: 'https://vk.com/music/album/-2000982793_26982793_474dc88c176bf0a529',
                 yandex: 'https://music.yandex.ru/album/41069021?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/bm26-last-one/1885769833'
-            }
+            },
+            tracks: [
+                { id: 71, title: 'Я хочу поговорить (skit)' },
+                { id: 72, title: 'BM26 INTRO' },
+                { id: 73, title: 'Дедройт сука' },
+                { id: 74, title: 'перекур 1 (skit)' },
+                { id: 75, title: 'Бля нахуй ****' },
+                { id: 24, title: 'More (Remix) (Ft. Act0r1)' },
+                { id: 76, title: 'donor (Ft. Baby Cute)' },
+                { id: 77, title: 'Не адекват' },
+                { id: 78, title: 'перекур 2 (skit)' },
+                { id: 79, title: 'Сплетни (Ft. Confl1ct)' },
+                { id: 80, title: 'Потеря смысла' },
+                { id: 81, title: 'Важно (skit)' },
+                { id: 82, title: 'любит нарк*' },
+                { id: 83, title: 'NEW YEAST' },
+                { id: 84, title: 'перекур 3 (skit)' },
+                { id: 85, title: 'Забегали' },
+                { id: 86, title: 'Я не хотел бы чтобы у меня был такой тре...' },
+                { id: 87, title: 'Последний трек' },
+                { id: 88, title: 'BM26 OUTRO (skit)' }
+            ]
         },
-        {
-            id: 26,
-            title: 'Ненавижу зиму',
-            date: '01.05.2026',
-            cover: 'images/19-nenavizhu-zimu.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: true,
-            link: 'track.html?id=26',
-            links: {
-                spotify: 'https://open.spotify.com/album/4hFNfaavttMZsJyZ0EMXjB?si=8-o6zZo0TZK_5erwUL5xJg',
-                vk: 'https://vk.com/music/album/-2000177045_27177045_1169e857443d3a9da0',
-                yandex: 'https://music.yandex.ru/album/41377478?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%BD%D0%B5%D0%BD%D0%B0%D0%B2%D0%B8%D0%B6%D1%83-%D0%B7%D0%B8%D0%BC%D1%83-single/1890770765'
-            }
-        },
-        {
+        9: {
             id: 9,
             title: 'Эхо в пустой комнате',
             date: '08.05.2026',
+            prod: 'LIJA, Confl1ct',
             cover: 'images/20-eho.jpg',
-            type: 'album',
-            tracksCount: 6,
-            highlight: false,
-            link: 'album.html?id=9',
             links: {
                 spotify: 'https://open.spotify.com/album/7jHUOHimFddJWmYLFhsIaf?si=0-CXW-k7QU2YTXqeZMga_Q',
                 vk: 'https://vk.com/music/album/-2000301988_27301988_524251d4aeccffac46',
                 yandex: 'https://music.yandex.ru/album/41481590?utm_source=web&utm_medium=copy_link',
                 apple: 'https://music.apple.com/ru/album/%D1%8D%D1%85%D0%BE-%D0%B2-%D0%BF%D1%83%D1%81%D1%82%D0%BE%D0%B9-%D0%BA%D0%BE%D0%BC%D0%BD%D0%B0%D1%82%D0%B5-ep/1892917028'
-            }
-        },
-        {
-            id: 28,
-            title: 'Космос',
-            date: '29.05.2026',
-            cover: 'images/21-kosmos.jpg',
-            type: 'single',
-            tracksCount: 1,
-            highlight: false,
-            link: 'track.html?id=94',
-            links: {
-                spotify: 'https://open.spotify.com/album/73DBCDwGxK6OTGNSYZuxaF?si=_FgWNK8ySmGTwZZQ3jX15Q',
-                vk: 'https://vk.com/music/album/-2000283991_27283991_1fc95e515818296e89',
-                yandex: 'https://music.yandex.ru/album/41458544?utm_source=web&utm_medium=copy_link',
-                apple: 'https://music.apple.com/ru/album/%D0%BA%D0%BE%D1%81%D0%BC%D0%BE%D1%81-single/1892197003'
-            }
+            },
+            tracks: [
+                { id: 89, title: 'ERROR' },
+                { id: 90, title: 'привычки' },
+                { id: 26, title: 'Ненавижу зиму' },
+                { id: 91, title: 'Узоры Жизни' },
+                { id: 92, title: 'Комета (Ft. Неисправность) [BONUS]' },
+                { id: 93, title: 'Не поможет (Ft. Неисправность) [BONUS]' }
+            ]
         }
+    };
+
+    // ===== ВСЕ РЕЛИЗЫ =====
+    const allReleases = [
+        { id: 1, title: 'Последнее лето', date: '28.10.2024', cover: 'images/01-poslednee-leto.jpg', type: 'album', tracksCount: 8, highlight: false },
+        { id: 9, title: 'LAZER VOVA 2', date: '29.11.2024', cover: 'images/02-lazer-vova-2.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 2, title: 'NEW WAY 2', date: '06.01.2025', cover: 'images/03-new-way-2.jpg', type: 'album', tracksCount: 7, highlight: false },
+        { id: 11, title: 'Не вернусь', date: '15.03.2025', cover: 'images/04-ne-vernus.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 12, title: 'Помощь ангелов', date: '06.05.2025', cover: 'images/05-pomosh-angelov.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 3, title: '4 U', date: '03.07.2025', cover: 'images/06-4u.jpg', type: 'ep', tracksCount: 4, highlight: false },
+        { id: 14, title: 'Реально Последнее Лето', date: '18.07.2025', cover: 'images/07-realno-poslednee-leto.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 4, title: 'КОДЕКС', date: '25.07.2025', cover: 'images/08-kodeks.jpg', type: 'album', tracksCount: 11, highlight: false },
+        { id: 16, title: 'Порой Другой Белый Хочет', date: '01.08.2025', cover: 'images/09-belyi-hochet.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 17, title: 'Головокружение', date: '22.08.2025', cover: 'images/10-golovokruzenie.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 18, title: 'Бублик', date: '29.08.2025', cover: 'images/11-bublik.jpg', type: 'single', tracksCount: 1, highlight: true },
+        { id: 5, title: 'MUSIC IS ME, Pt. 2', date: '06.10.2025', cover: 'images/12-music-is-me-pt2.jpg', type: 'album', tracksCount: 10, highlight: false },
+        { id: 6, title: 'NW 4', date: '05.11.2025', cover: 'images/13-nw-4.jpg', type: 'ep', tracksCount: 1, highlight: false },
+        { id: 21, title: 'Jump', date: '10.11.2025', cover: 'images/14-jump.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 22, title: 'Хочу', date: '01.12.2025', cover: 'images/15-hochu.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 7, title: 'LIJA', date: '16.01.2026', cover: 'images/16-lija.jpg', type: 'album', tracksCount: 14, highlight: false },
+        { id: 24, title: 'More (Remix)', date: '27.02.2026', cover: 'images/17-more-remix.jpg', type: 'single', tracksCount: 1, highlight: false },
+        { id: 8, title: 'BM26 (Last One)', date: '25.03.2026', cover: 'images/18-bm26.jpg', type: 'album', tracksCount: 19, highlight: false },
+        { id: 26, title: 'Ненавижу зиму', date: '01.05.2026', cover: 'images/19-nenavizhu-zimu.jpg', type: 'single', tracksCount: 1, highlight: true },
+        { id: 9, title: 'Эхо в пустой комнате', date: '08.05.2026', cover: 'images/20-eho.jpg', type: 'album', tracksCount: 6, highlight: false },
+        { id: 28, title: 'Космос', date: '29.05.2026', cover: 'images/21-kosmos.jpg', type: 'single', tracksCount: 1, highlight: false }
     ];
 
-    const grid = document.getElementById('releasesGrid');
+    // ===== КОНТЕЙНЕР =====
+    const container = document.getElementById('albumContent');
 
-    allReleases.forEach(release => {
-        const card = document.createElement('a');
-        card.className = 'release-card' + (release.highlight ? ' highlight' : '');
-        card.href = release.link;
+    // ===== ПОЛУЧАЕМ ID ИЗ URL =====
+    const params = new URLSearchParams(window.location.search);
+    const albumId = parseInt(params.get('id'));
 
-        let badgeText = '';
-        let badgeClass = '';
-        if (release.highlight) {
-            badgeText = '⭐ ХИТ';
-            badgeClass = 'hit';
-        } else {
-            const typeLabels = {
-                album: '🎵 Альбом',
-                ep: '📀 EP',
-                single: '🎧 Сингл'
-            };
-            const typeClasses = {
-                album: 'album',
-                ep: 'ep',
-                single: 'single'
-            };
-            badgeText = typeLabels[release.type] || '🎧 Сингл';
-            badgeClass = typeClasses[release.type] || 'single';
-        }
+    // ===== ЕСЛИ ЕСТЬ ID — ПОКАЗЫВАЕМ ТРЕКИ =====
+    if (albumId && albums[albumId]) {
+        const album = albums[albumId];
 
+        let tracksHtml = album.tracks.map((track, index) => {
+            return `
+                <li>
+                    <a href="track.html?id=${track.id}">
+                        <span class="track-number">${String(index + 1).padStart(2, '0')}.</span>
+                        <span class="track-title">${track.title}</span>
+                        <span class="play-icon">▶</span>
+                    </a>
+                </li>
+            `;
+        }).join('');
+
+        // ===== ССЫЛКИ НА ПЛОЩАДКИ =====
         let linksHtml = '';
-        if (release.links) {
-            for (const [platform, url] of Object.entries(release.links)) {
+        if (album.links) {
+            for (const [platform, url] of Object.entries(album.links)) {
                 if (url) {
                     linksHtml += `
-                        <a href="${url}" target="_blank" title="${platform.charAt(0).toUpperCase() + platform.slice(1)}" onclick="event.stopPropagation();">
+                        <a href="${url}" target="_blank" title="${platform.charAt(0).toUpperCase() + platform.slice(1)}">
                             ${platformIcons[platform] || '🔗'}
                         </a>
                     `;
@@ -767,23 +737,84 @@
             }
         }
 
-        card.innerHTML = `
-            <div class="cover-wrap">
-                <img src="${release.cover}" alt="${release.title}" loading="lazy">
-                <div class="play-overlay">
-                    <span>▶</span>
+        container.innerHTML = `
+            <a href="album.html" class="back-link">← Назад к релизам</a>
+            <div class="album-detail">
+                <div class="album-header">
+                    <div class="album-cover">
+                        <img src="${album.cover}" alt="${album.title}">
+                    </div>
+                    <div class="album-info">
+                        <h1>${album.title}</h1>
+                        <div class="date">📅 ${album.date}</div>
+                        <div class="prod">${album.prod}</div>
+                        <div class="count">${album.tracks.length} треков</div>
+                        ${linksHtml ? `<div class="album-links">${linksHtml}</div>` : ''}
+                    </div>
                 </div>
-            </div>
-            <div class="info">
-                <div class="title">${release.title}</div>
-                <div class="meta">📅 ${release.date} · ${release.tracksCount} треков</div>
-                <span class="badge ${badgeClass}">${badgeText}</span>
-                ${linksHtml ? `<div class="release-links">${linksHtml}</div>` : ''}
+                <ul class="track-list">
+                    ${tracksHtml}
+                </ul>
             </div>
         `;
 
-        grid.appendChild(card);
-    });
+        document.title = `LIJA | ${album.title}`;
+
+        // ===== ИНАЧЕ — ВИТРИНА =====
+    } else {
+        const typeLabels = {
+            album: '🎵 Альбом',
+            ep: '📀 EP',
+            single: '🎧 Сингл'
+        };
+
+        const typeClasses = {
+            album: 'album',
+            ep: 'ep',
+            single: 'single'
+        };
+
+        let gridHtml = '';
+
+        allReleases.forEach(release => {
+            let badgeText = '';
+            let badgeClass = '';
+            if (release.highlight) {
+                badgeText = '⭐ ХИТ';
+                badgeClass = 'hit';
+            } else {
+                badgeText = typeLabels[release.type] || '🎧 Сингл';
+                badgeClass = typeClasses[release.type] || 'single';
+            }
+
+            const link = release.type === 'single' ?
+                `track.html?id=${release.id}` :
+                `album.html?id=${release.id}`;
+
+            gridHtml += `
+                <a href="${link}" class="release-card ${release.highlight ? 'highlight' : ''}">
+                    <div class="cover-wrap">
+                        <img src="${release.cover}" alt="${release.title}" loading="lazy">
+                    </div>
+                    <div class="info">
+                        <div class="title">${release.title}</div>
+                        <div class="meta">📅 ${release.date} · ${release.tracksCount} треков</div>
+                        <span class="badge ${badgeClass}">${badgeText}</span>
+                    </div>
+                </a>
+            `;
+        });
+
+        container.innerHTML = `
+            <h1 class="page-title">🎵 <span>Релизы</span></h1>
+            <p class="page-subtitle">Альбомы, EP и синглы</p>
+            <div class="releases-grid">
+                ${gridHtml}
+            </div>
+        `;
+
+        document.title = 'LIJA | Релизы';
+    }
 </script>
 
 </body>
