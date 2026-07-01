@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIJA | Неофициальное</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 20% 50%, rgba(255, 0, 60, 0.04), transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, rgba(100, 0, 255, 0.03), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 92%;
+            margin: 0 auto;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ff003c, #ff6b8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: #ff003c;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff003c;
+            transition: 0.3s;
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 40px 0 10px;
+            letter-spacing: 2px;
+        }
+
+        .page-title span {
+            color: #ff003c;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .unofficial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .unofficial-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+
+        .unofficial-card:hover {
+            border-color: #ff003c;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(255, 0, 60, 0.08);
+        }
+
+        .unofficial-card .cover-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .unofficial-card .cover-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .unofficial-card:hover .cover-wrap img {
+            transform: scale(1.03);
+        }
+
+        .unofficial-card .cover-wrap .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+            backdrop-filter: blur(2px);
+        }
+
+        .unofficial-card:hover .cover-wrap .play-overlay {
+            opacity: 1;
+        }
+
+        .unofficial-card .cover-wrap .play-overlay span {
+            font-size: 2.5rem;
+            color: #fff;
+            background: #ff003c;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.3);
+        }
+
+        .unofficial-card .info {
+            padding: 16px 18px 18px;
+        }
+
+        .unofficial-card .badge {
+            display: inline-block;
+            font-size: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            background: #00b4d8;
+            color: #fff;
+        }
+
+        .unofficial-card .badge.bandlab {
+            background: #00b4d8;
+        }
+
+        .unofficial-card .badge.soundcloud {
+            background: #ff5500;
+        }
+
+        .unofficial-card .badge.telegram {
+            background: #0088cc;
+        }
+
+        .unofficial-card .badge.local {
+            background: #6a00ff;
+        }
+
+        .unofficial-card .title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .unofficial-card .meta {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        .unofficial-card .tracks-count {
+            font-size: 0.7rem;
+            color: #ff003c;
+            margin-top: 4px;
+        }
+
+        /* ===== СТРАНИЦА АЛЬБОМА ===== */
+        .album-detail {
+            grid-column: 1 / -1;
+        }
+
+        .album-detail .back-link {
+            display: inline-block;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .album-detail .back-link:hover {
+            color: #ff003c;
+        }
+
+        .album-detail .album-info {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .album-detail .album-info h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .album-detail .album-info .date {
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .album-detail .album-info .desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .album-detail .track-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .album-detail .track-list .track-item {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+        }
+
+        .album-detail .track-list .track-item:hover {
+            border-color: #ff003c;
+        }
+
+        .album-detail .track-list .track-item .track-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .album-detail .track-list .track-item .num {
+            color: #ff003c;
+            font-weight: bold;
+            font-size: 0.85rem;
+            min-width: 30px;
+        }
+
+        .album-detail .track-list .track-item .name {
+            flex: 1;
+        }
+
+        .album-detail .track-list .track-item .btn-lyrics {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .album-detail .track-list .track-item .btn-lyrics:hover {
+            color: #ff003c;
+        }
+
+        .album-detail .track-list .track-item .play {
+            color: #555;
+            transition: 0.3s;
+        }
+
+        .album-detail .track-list .track-item:hover .play {
+            color: #ff003c;
+        }
+
+        .album-detail .track-list .track-item .track-audio {
+            margin-left: 45px;
+        }
+
+        .album-detail .track-list .track-item .track-audio audio {
+            width: 100%;
+            height: 32px;
+            outline: none;
+            border-radius: 6px;
+        }
+
+        .album-detail .track-list .track-item .track-audio audio::-webkit-media-controls-panel {
+            background: #1a1a1a;
+        }
+
+        .album-detail .track-list .track-item .track-lyrics {
+            display: none;
+            margin-left: 45px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            color: #888;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer p {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav {
+                gap: 20px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .unofficial-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 20px;
+            }
+            .album-detail .album-info h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.6rem;
+            }
+            .unofficial-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .unofficial-card .info {
+                padding: 12px 14px 14px;
+            }
+            .unofficial-card .title {
+                font-size: 0.85rem;
+            }
+            .unofficial-card .meta {
+                font-size: 0.6rem;
+            }
+            .unofficial-card .cover-wrap .play-overlay span {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            .album-detail .album-info {
+                padding: 20px;
+            }
+            .album-detail .album-info h2 {
+                font-size: 1.3rem;
+            }
+            .album-detail .track-list .track-item {
+                padding: 10px 12px;
+            }
+            .album-detail .track-list .track-item .track-row {
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+            }
+            .album-detail .track-list .track-item .track-audio {
+                margin-left: 0;
+            }
+            .album-detail .track-list .track-item .track-lyrics {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <a href="index.html" class="logo">LIJA</a>
+        <nav class="nav">
+            <a href="index.html">Главная</a>
+            <a href="album.html">Релизы</a>
+            <a href="unofficial.html" class="active">Неофициальное</a>
+        </nav>
+    </header>
+
+    <h1 class="page-title">🎧 <span>Неофициальные</span> релизы</h1>
+    <p class="page-subtitle">Альбомы, которые не попали на стриминги</p>
+
+    <div class="unofficial-grid" id="unofficialGrid">
+        <!-- Данные подгрузятся через JS -->
+    </div>
+
+    <footer class="footer">
+        <p>© 2025–2026 LIJA. Все права защищены.</p>
+    </footer>
+
+</div>
+
+<script>
+    // ===== НЕОФИЦИАЛЬНЫЕ АЛЬБОМЫ =====
+    const unofficialAlbums = [
+        {
+            id: 'bm25-2',
+            title: 'BM25-2',
+            date: '11.12.2025',
+            platform: 'BandLab',
+            desc: '15 треков. Альбом-другое.',
+            cover: 'images/bm25-2.jpg',
+            tracks: 15,
+            badgeClass: 'bandlab'
+        },
+        {
+            id: 'frgp',
+            title: 'F*ck Rap, Go Pop (FRGP)',
+            date: '05.02.2026',
+            platform: 'BandLab',
+            desc: '7 треков. Альбом-другое.',
+            cover: 'images/frgp.jpg',
+            tracks: 7,
+            badgeClass: 'bandlab'
+        },
+        {
+            id: 'mixlija-pt1',
+            title: 'MIXLIJA Pt.1',
+            date: '30.04.2026',
+            platform: 'BandLab',
+            desc: '6 треков. Альбом-другое.',
+            cover: 'images/mixlija-pt1.jpg',
+            tracks: 6,
+            badgeClass: 'bandlab'
+        }
+    ];
+
+    // ===== ТРЕКИ, АУДИО И ТЕКСТЫ =====
+    const albumTracks = {
+        'bm25-2': [
+            { title: 'Предупреждение', audio: 'audio/unreleased/bm25-2/01-predpreduprezhdenie.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'ОТКРЫТИЕ 2 СУКАААААА (FLOGBUDA)', audio: 'audio/unreleased/bm25-2/02-otkrytie-2.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Freestyle :)', audio: 'audio/unreleased/bm25-2/03-freestyle.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Закадрила (Ft. tunlqe, nkeeel, ARTEM SHIL...)', audio: 'audio/unreleased/bm25-2/04-zakadrila.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Jump', audio: 'audio/unreleased/bm25-2/05-jump.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Забирайте Бабки (Ft. Act0r1)', audio: 'audio/unreleased/bm25-2/06-zabiraite-babki.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Одинок (freestyle)', audio: 'audio/unreleased/bm25-2/07-odinok.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Укулеле (Ft. MAYOT)', audio: 'audio/unreleased/bm25-2/08-ukulele.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Кто простит меня (Ft. PHARAOH)', audio: 'audio/unreleased/bm25-2/09-kto-prostit-menya.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Плохой человек', audio: 'audio/unreleased/bm25-2/10-plohoy-chelovek.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Хочу', audio: 'audio/unreleased/bm25-2/11-hochu.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Умереть? (2)', audio: 'audio/unreleased/bm25-2/12-umeret-2.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Разрушительно (Ft. Неисправность)', audio: 'audio/unreleased/bm25-2/13-razrushitelno.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Негативное Мышление (Ft. Три Дня Дождя)', audio: 'audio/unreleased/bm25-2/14-negativnoe-myshlenie.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Завершение', audio: 'audio/unreleased/bm25-2/15-zavershenie.mp3', lyrics: 'Текст пока не добавлен' }
+        ],
+        'frgp': [
+            { 
+                title: 'FRGP INTRO', 
+                audio: 'audio/unreleased/frgp/01-frgp-intro.mp3', 
+                lyrics: `[Предприпев]\nYeah, я устал делать рэп, хочу новый звук\nЯ поднимусь вверх, моя музыка будет ебать клуб\nПохуй на проблемы, хочу, чтобы просто двигала телом\nДвигай, двигай\n\n[Припев]\nЯ просто хочу делать попсу, yeah yeah yeah (попсу)\nЯ-я просто хочу сделать попсу, yeah, yeah\nСука, просто слушай новый звук\nЯ хочу сделать попсу на век\n\n[Куплет]\nЭй, даже на попсе моя музыка звучит лучше, чем у рэперов\nЕсли вам не зайдет такой стиль, значит, просто lame'ы вы\nЯ могу много делать музыки, похуй на проблемы (сука, сука, двигай телом)\nМогу зачитать как угодно, я не боюсь\nСука ненавидит меня — значит, я просто съебусь (значит, я просто съебусь)\nЕсли я открою дверь, сука, она зайдет в клуб\nЯ просто делаю попсу\n\n[Бридж]\nВоу-воу-воу, я просто хочу сделать новый звук\nВоу-воу-воу, хочу залететь на попсу\nВоу-воу-воу, я просто хочу сделать новый звук\nПросто хочу залететь на попсу\n\n[Предприпев]\nYeah, я устал делать рэп, хочу новый звук\nЯ поднимусь вверх, моя музыка будет ебать клуб\nПохуй на проблемы, хочу, чтобы просто двигала телом\nДвигай, двигай, двигай, двигай, двигай, двигай\n\n[Припев]\nЯ просто хочу делать попсу, yeah yeah yeah yeah\nЯ-я просто хочу сделать попсу, yeah, yeah\nСука, просто слушай новый звук\nЯ хочу сделать попсу на век`
+            },
+            { title: 'Забей', audio: 'audio/unreleased/frgp/02-zabey.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Наказать (Ft. unique, Wipo & nkeeel)', audio: 'audio/unreleased/frgp/03-nakazat.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Звезда', audio: 'audio/unreleased/frgp/04-zvezda.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Качать (Ft. ARTEM SHILOVETS)', audio: 'audio/unreleased/frgp/05-kachat.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Пошлю На******', audio: 'audio/unreleased/frgp/06-poshlyu-na.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'FRGP OUTRO', audio: 'audio/unreleased/frgp/07-frgp-outro.mp3', lyrics: 'Текст пока не добавлен' }
+        ],
+        'mixlija-pt1': [
+            { title: 'Интро (Ft. OG Buda)', audio: 'audio/unreleased/mixlija-pt1/01-intro.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Буду гнить', audio: 'audio/unreleased/mixlija-pt1/02-budu-gnit.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Козлы (Ft. 163ONMYNECK, ASKET, MATXX, ...)', audio: 'audio/unreleased/mixlija-pt1/03-kozly.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Школа не нужна (Ft. uglystephan)', audio: 'audio/unreleased/mixlija-pt1/04-shkola-ne-nuzhna.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Yeat', audio: 'audio/unreleased/mixlija-pt1/05-yeat.mp3', lyrics: 'Текст пока не добавлен' },
+            { title: 'Кутью (Ft. Baby Melo)', audio: 'audio/unreleased/mixlija-pt1/06-kutju.mp3', lyrics: 'Текст пока не добавлен' }
+        ]
+    };
+
+    const grid = document.getElementById('unofficialGrid');
+
+    // ===== ПОЛУЧАЕМ ID ИЗ URL =====
+    const params = new URLSearchParams(window.location.search);
+    const albumId = params.get('id');
+
+    // ===== ФУНКЦИЯ ПОКАЗА ТЕКСТА =====
+    function toggleLyrics(id) {
+        const el = document.getElementById(`lyrics-${id}`);
+        if (el) {
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    // ===== ЕСЛИ ОТКРЫТ АЛЬБОМ =====
+    if (albumId && albumTracks[albumId]) {
+        const tracks = albumTracks[albumId];
+        const album = unofficialAlbums.find(a => a.id === albumId);
+
+        let tracksHtml = tracks.map((track, index) => {
+            const lyricsId = `${albumId}-${index}`;
+            return `
+                <div class="track-item">
+                    <div class="track-row">
+                        <span class="num">${String(index + 1).padStart(2, '0')}.</span>
+                        <span class="name">${track.title}</span>
+                        <button class="btn-lyrics" onclick="toggleLyrics('${lyricsId}')">📝</button>
+                        <span class="play">▶</span>
+                    </div>
+                    <div class="track-audio">
+          
