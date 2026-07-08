@@ -445,6 +445,76 @@
                 margin-left: 0;
             }
         }
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-title {
+    animation: fadeUp 0.8s ease-out forwards;
+}
+
+.page-subtitle {
+    animation: fadeUp 0.8s ease-out 0.15s forwards;
+    opacity: 0;
+}
+
+.unofficial-grid {
+    animation: fadeUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+.unofficial-card {
+    opacity: 0;
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+.unofficial-card:nth-child(1) { animation-delay: 0.05s; }
+.unofficial-card:nth-child(2) { animation-delay: 0.1s; }
+.unofficial-card:nth-child(3) { animation-delay: 0.15s; }
+.unofficial-card:nth-child(4) { animation-delay: 0.2s; }
+.unofficial-card:nth-child(5) { animation-delay: 0.25s; }
+.unofficial-card:nth-child(6) { animation-delay: 0.3s; }
+.unofficial-card:nth-child(7) { animation-delay: 0.35s; }
+.unofficial-card:nth-child(8) { animation-delay: 0.4s; }
+.unofficial-card:nth-child(9) { animation-delay: 0.45s; }
+.unofficial-card:nth-child(10) { animation-delay: 0.5s; }
+
+.album-detail {
+    animation: fadeUp 0.8s ease-out forwards;
+}
+
+.back-link {
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+.track-item {
+    opacity: 0;
+    animation: fadeUp 0.4s ease-out forwards;
+}
+
+.track-item:nth-child(1) { animation-delay: 0.05s; }
+.track-item:nth-child(2) { animation-delay: 0.1s; }
+.track-item:nth-child(3) { animation-delay: 0.15s; }
+.track-item:nth-child(4) { animation-delay: 0.2s; }
+.track-item:nth-child(5) { animation-delay: 0.25s; }
+.track-item:nth-child(6) { animation-delay: 0.3s; }
+.track-item:nth-child(7) { animation-delay: 0.35s; }
+.track-item:nth-child(8) { animation-delay: 0.4s; }
+.track-item:nth-child(9) { animation-delay: 0.45s; }
+.track-item:nth-child(10) { animation-delay: 0.5s; }
+.track-item:nth-child(11) { animation-delay: 0.55s; }
+.track-item:nth-child(12) { animation-delay: 0.6s; }
+.track-item:nth-child(13) { animation-delay: 0.65s; }
+.track-item:nth-child(14) { animation-delay: 0.7s; }
+.track-item:nth-child(15) { animation-delay: 0.75s; }
     </style>
 </head>
 <body>
