@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -429,6 +429,100 @@
                 font-size: 1rem;
             }
         }
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.page-title {
+    animation: fadeUp 0.8s ease-out forwards;
+}
+
+.page-subtitle {
+    animation: fadeUp 0.8s ease-out 0.15s forwards;
+    opacity: 0;
+}
+
+.releases-grid {
+    animation: fadeUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+.release-card {
+    opacity: 0;
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+.release-card:nth-child(1) { animation-delay: 0.05s; }
+.release-card:nth-child(2) { animation-delay: 0.1s; }
+.release-card:nth-child(3) { animation-delay: 0.15s; }
+.release-card:nth-child(4) { animation-delay: 0.2s; }
+.release-card:nth-child(5) { animation-delay: 0.25s; }
+.release-card:nth-child(6) { animation-delay: 0.3s; }
+.release-card:nth-child(7) { animation-delay: 0.35s; }
+.release-card:nth-child(8) { animation-delay: 0.4s; }
+.release-card:nth-child(9) { animation-delay: 0.45s; }
+.release-card:nth-child(10) { animation-delay: 0.5s; }
+.release-card:nth-child(11) { animation-delay: 0.55s; }
+.release-card:nth-child(12) { animation-delay: 0.6s; }
+.release-card:nth-child(13) { animation-delay: 0.65s; }
+.release-card:nth-child(14) { animation-delay: 0.7s; }
+.release-card:nth-child(15) { animation-delay: 0.75s; }
+.release-card:nth-child(16) { animation-delay: 0.8s; }
+.release-card:nth-child(17) { animation-delay: 0.85s; }
+.release-card:nth-child(18) { animation-delay: 0.9s; }
+.release-card:nth-child(19) { animation-delay: 0.95s; }
+.release-card:nth-child(20) { animation-delay: 1s; }
+
+.album-detail {
+    animation: fadeUp 0.8s ease-out forwards;
+}
+
+.track-list li {
+    opacity: 0;
+    animation: fadeUp 0.4s ease-out forwards;
+}
+
+.track-list li:nth-child(1) { animation-delay: 0.05s; }
+.track-list li:nth-child(2) { animation-delay: 0.1s; }
+.track-list li:nth-child(3) { animation-delay: 0.15s; }
+.track-list li:nth-child(4) { animation-delay: 0.2s; }
+.track-list li:nth-child(5) { animation-delay: 0.25s; }
+.track-list li:nth-child(6) { animation-delay: 0.3s; }
+.track-list li:nth-child(7) { animation-delay: 0.35s; }
+.track-list li:nth-child(8) { animation-delay: 0.4s; }
+.track-list li:nth-child(9) { animation-delay: 0.45s; }
+.track-list li:nth-child(10) { animation-delay: 0.5s; }
+.track-list li:nth-child(11) { animation-delay: 0.55s; }
+.track-list li:nth-child(12) { animation-delay: 0.6s; }
+.track-list li:nth-child(13) { animation-delay: 0.65s; }
+.track-list li:nth-child(14) { animation-delay: 0.7s; }
+.track-list li:nth-child(15) { animation-delay: 0.75s; }
+.track-list li:nth-child(16) { animation-delay: 0.8s; }
+.track-list li:nth-child(17) { animation-delay: 0.85s; }
+.track-list li:nth-child(18) { animation-delay: 0.9s; }
+.track-list li:nth-child(19) { animation-delay: 0.95s; }
+.track-list li:nth-child(20) { animation-delay: 1s; }
+
+.back-link {
+    animation: fadeUp 0.6s ease-out forwards;
+}
     </style>
 </head>
 <body>
